@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: httpd-demo
+spec:
+  containers:
+    - image: httpd:latest
+      name: httpd-demo
+      ports:
+        - containerPort: 8082
+      imagePullPolicy: Always

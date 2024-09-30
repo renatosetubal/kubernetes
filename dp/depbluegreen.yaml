@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: meupod1
+  labels:
+    name: web
+    version: blue
+spec:
+  containers:
+  - name: web
+    image: kubedevio/web-color:blue
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+    - name: http
+      containerPort: 80
+      protocol: TCP
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: meupod2
+  labels:
+    name: web
+    version: green
+spec:
+  containers:
+  - name: web
+    image: kubedevio/web-color:green
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    ports:
+    - name: http
+      containerPort: 80
+      protocol: TCP
