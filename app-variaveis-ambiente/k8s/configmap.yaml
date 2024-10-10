@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_VERSION: "V2.0"
+  APP_AUTHOR: "Renato Setubal"
+  APP_NAME: "App ConfigMap V2"

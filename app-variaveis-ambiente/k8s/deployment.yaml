@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-configuracao
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-configuracao
+  template:
+    metadata:
+      labels:
+        app: app-configuracao
+    spec:
+      containers:
+      - name: app-configuracao
+        image: kubedevio/app-variaveis-ambiente:v1
+        ports:
+        - containerPort: 3000
+        env:
+        - name: APP_NAME
+          value: "Aplicação do Remiset"
+        - name: APP_VERSION
+          value: "V1.1"
+        - name: APP_AUTHOR
+          value: "Renato Miranda Setúbal (Remiset)"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-configuracao
+spec:
+  selector:
+    app: app-configuracao
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 3000
+    name: http
+    protocol: TCP
+    nodePort: 30000
