@@ -1,0 +1,2 @@
+ k3d cluster create --servers 3 --agents 3 -p "5432:30000@loadbalancer"
+ k3d cluster delete 
