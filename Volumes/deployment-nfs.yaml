@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-server
+  labels:
+    app: nfs-server
+spec:
+  selector:
+    matchLabels:
+      app: nfs-server
+  template:
+    metadata:
+      labels:
+        app: nfs-server
+    spec:
+      containers:
+      - name: nfs-server
+        image: webera/nfs
+        securityContext:
+          privileged: true
+        command: ["/bin/bash", "-c", "--"]
+        args: ["while true; do sleep 30; done;"]
+        ports:
+        - name: nfs
+          containerPort: 2049
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"

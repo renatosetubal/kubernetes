@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debian-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: debian
+  template:
+    metadata:
+      labels:
+        app: debian
+    spec:
+      containers:
+      - name: debian-container
+        image: debian:bookworm
+        command: ["/bin/bash", "-c", "--"]
+        args: ["while true; do sleep 30; done;"]
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        ports:
+        - containerPort: 80
