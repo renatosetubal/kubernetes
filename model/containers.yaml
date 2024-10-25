@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfsdeployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nfs-container
+  template:
+    metadata:
+      labels:
+        app: nfs-container
+    spec:
+      containers:
+      - name: server
+        image: webera/nfs
+        #image: debian:slim
+        securityContext:
+          privileged: true
+        command: ["/bin/bash", "-c", "--"]
+        args:
+        - |
+          echo "/exports *(rw,sync,no_subtree_check,no_root_squash,insecure)" > /etc/exports  && \
+          exportfs -ar && \
+          service nfs-kernel-server restart && \
+          while true; do sleep 30; done
+        ports:
+        - name: nfs
+          containerPort: 2049
+      - name: client
+        image: debian:bookworm
+        securityContext:
+          privileged: true
+        command: ["sleep", "3600"]
+

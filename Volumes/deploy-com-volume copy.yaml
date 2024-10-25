@@ -26,20 +26,7 @@ spec:
     spec:
       containers:
       - name: nfs-server
-        image: webera/nfs
-        #image: debian:slim
-        securityContext:
-          privileged: true
-        command: ["/bin/bash", "-c", "--"]
-        args:
-        - |
-          echo "/exports *(rw,sync,no_subtree_check,no_root_squash,insecure)" > /etc/exports  && \
-          exportfs -ar && \
-          service nfs-kernel-server restart && \
-          while true; do sleep 30; done
-        ports:
-        - name: nfs-server-port
-          containerPort: 2049
+        image: debian:bookworm
       - name: postgre
         image: postgres:15.0
         ports:

@@ -13,4 +13,4 @@ spec:
   - nfsvers=4.2
   nfs:
     path: /exports
-    server: 10.42.3.3
+    server: 10.42.2.4
