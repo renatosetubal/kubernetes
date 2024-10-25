@@ -1,0 +1,4 @@
+echo "/exports *(rw,sync,no_subtree_check,no_root_squash,insecure)" >> /etc/exports 
+exportfs -ar
+service nfs-kernel-server restart
+exportfs

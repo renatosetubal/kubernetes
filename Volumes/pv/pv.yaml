@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: db-pv-nfs
+spec:
+  capacity:
+    storage: 4Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: nfs-static-storage
+  mountOptions:
+  - nfsvers=4.2
+  nfs:
+    path: /exports
+    server: 10.42.3.3

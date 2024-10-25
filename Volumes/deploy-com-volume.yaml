@@ -1,7 +1,20 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: db-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: nfs-static-storage
+  resources:
+    requests:
+      storage: 4Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: postgre
+  namespace: bd
 spec:
   selector:
     matchLabels:
@@ -31,9 +44,8 @@ spec:
           subPath: "pgdata"
       volumes:
       - name: db-vol
-        hostPath:
-          path: /k3d/images
-          type: Directory
+        persistentVolumeClaim:
+          claimName: db-pvc
 ---
 apiVersion: v1
 kind: Service

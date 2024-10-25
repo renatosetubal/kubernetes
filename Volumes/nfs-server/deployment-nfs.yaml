@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nfs-server
+  namespace: bd
   labels:
     app: nfs-server
 spec:
@@ -15,7 +16,8 @@ spec:
     spec:
       containers:
       - name: nfs-server
-        image: webera/nfs
+        #image: webera/nfs
+        image: debian:slim
         securityContext:
           privileged: true
         command: ["/bin/bash", "-c", "--"]
